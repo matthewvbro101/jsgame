@@ -1,0 +1,15 @@
+.box {
+    width: 800px;
+    height: 600px;
+    background-color: lightblue;
+    position: relative;
+}
+
+.box #player {
+    width: 50px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+    top: 590px;
+    left: 200px;
+}
