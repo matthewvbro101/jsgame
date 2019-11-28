@@ -14,7 +14,7 @@ document.addEventListener('keydown', (e) => {
             moveLeft();
             if (player.offsetLeft - 5 + 'px' <= -800 + 'px') {
                 player.style.left = 0 + 'px';
-                console.log("end");
+                // console.log("end");
             }
             // console.log("left key");
             break;
