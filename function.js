@@ -1,5 +1,9 @@
 var player = document.getElementById('player');
-
+var box = document.getElementsByClassName('box');
+var playerWidth = player.offsetWidth;
+var playerHeight = player.offsetHeight;
+var boxWidth = box.offsetWidth;
+var boxHeight = box.offsetHeight;
 function moveLeft() {
     player.style.left = parseInt(player.offsetLeft) - 5 + 'px';
 }
@@ -12,7 +16,7 @@ document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 37:
             moveLeft();
-            if (player.offsetLeft - 5 + 'px' <= -800 + 'px') {
+            if (player.offsetLeft - 5 <= 0) {
                 player.style.left = 0 + 'px';
                 // console.log("end");
             }
@@ -20,7 +24,10 @@ document.addEventListener('keydown', (e) => {
             break;
         case 39:
             moveRight();
-            console.log("right key");
+            if (player.offsetLeft + 5 >= 750) {
+                player.style.left = 750 + 'px';
+            }
+            // console.log("right key");
             break;
 
     }
