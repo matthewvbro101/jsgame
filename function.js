@@ -1,16 +1,69 @@
 var player = document.getElementById('player');
 var box = document.getElementById('box');
-var ball = document.getElementById('ball');
+
 var playerWidth = player.offsetWidth;
 var playerHeight = player.offsetHeight;
 var boxWidth = box.offsetWidth;
 var boxHeight = box.offsetHeight;
-var ballWidth = ball.offsetWidth;
-var ballHeight = ball.offsetHeight;
-var speed = {
-    x: -5, 
-    y: 5
-};
+
+class Ball {
+    speed;
+    color;
+    size;
+    el;
+
+    constructor(id, speed, color, size) {
+        this.el = document.getElementById(id);
+        this.speed = speed;
+        this.color = color;
+        this.size = size;
+
+        this.el.style.backgroundColor = this.color;
+        this.el.style.width = this.size + 'px';
+        this.el.style.height = this.size + 'px';
+    }
+
+    checkBounds() {
+        var ball = this.el;
+    
+        if (ball.offsetLeft < 0) {
+            ball.style.left = '0px';
+            this.speed.x *= -1;
+        }
+        if (ball.offsetTop < 0) {
+            ball.style.top = '0px';
+            this.speed.y *= -1;
+        }
+        if (ball.offsetLeft > (boxWidth-ball.offsetHeight)) {
+            ball.style.left = (boxWidth - ball.offsetHeight) + 'px';
+            this.speed.x *= -1;
+        }
+    }
+
+    ballMovement() {
+        var ball = this.el;
+    
+        ball.style.left = ball.offsetLeft + this.speed.x + 'px';
+        ball.style.top = ball.offsetTop + this.speed.y + 'px';
+        if (ball.offsetTop > boxHeight-ball.offsetHeight-playerHeight) {
+            var ballRight = ball.offsetLeft + ball.offsetWidth;
+            var playerRight = player.offsetLeft + playerWidth;
+            if (ballRight > player.offsetLeft && ball.offsetLeft < playerRight) {
+                this.speed.y *= -1;
+            }
+        }
+        if (ball.offsetTop > boxHeight-ball.offsetHeight) {
+            box.removeChild(ball);
+        }
+    }
+}
+
+var ballObjs = [
+    new Ball('ball', {x:5, y:-5}, 'blue', 10),
+    new Ball('ball2', {x:-5, y:-5}, 'green', 10),
+    new Ball('ball3', {x:-10, y:-5}, 'yellow', 15),
+];
+
 
 function moveLeft() {
     player.style.left = parseInt(player.offsetLeft) - 5 + 'px';
@@ -39,33 +92,9 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function checkBounds() {
-    if (ball.offsetLeft < 0) {
-        ball.offsetLeft = 0;
-        speed.x *= -1;
-    }
-    if (ball.offsetTop < 0) {
-        ball.offsetTop = 0;
-        speed.y *= -1;
-    }
-}
-
 setInterval(function(){
-    ball.style.left = ball.offsetLeft + speed.x + 'px';
-    ball.style.top = ball.offsetTop + speed.y + 'px';
-
-    checkBounds();
-
-    if (ball.offsetTop > boxHeight-ball.offsetHeight-playerHeight) {
-        var ballRight = ball.offsetLeft + ballWidth;
-        var playerRight = player.offsetLeft + playerWidth;
-        if (ballRight > player.offsetLeft && ball.offsetLeft < playerRight) {
-            speed.y *= -1;
-            // console.log("inside");
-        }
-        // console.log("test");
-    }
-    if (ball.offsetTop > boxHeight-ball.offsetHeight){
-        box.removeChild(ball);
+    for (var i=0; i<ballObjs.length; i++) {
+        ballObjs[i].checkBounds();
+        ballObjs[i].ballMovement();
     }
 }, 100);

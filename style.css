@@ -23,3 +23,22 @@
     left: 400px;
     border-radius: 50%;
 }
+
+#ball2 {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    position: absolute;
+    border-radius: 50%;
+    top: 0px;
+    left: 400px;
+}
+#ball3 {
+    width: 10px;
+    height: 10px;
+    background-color: lightcoral;
+    position: absolute;
+    border-radius: 50%;
+    top: 0px;
+    left: 400px; 
+}
