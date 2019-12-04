@@ -13,7 +13,10 @@ class Ball {
     el;
 
     constructor(id, speed, color, size) {
-        this.el = document.getElementById(id);
+        this.el = document.createElement(id);
+        this.el.classList.add("ball");
+        box.appendChild(this.el);
+
         this.speed = speed;
         this.color = color;
         this.size = size;
