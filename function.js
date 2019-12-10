@@ -69,21 +69,22 @@ class Ball {
             this.increaseSpeed();
         }
     
+        if (newY > boxHeight-ball.offsetHeight - player.offsetHeight) {
+            var ballRight = newX + ball.offsetWidth;
+            var playerRight = player.offsetLeft + player.offsetWidth;
+            if (ballRight > player.offsetLeft && newX < playerRight) {
+                newY = boxHeight-ball.offsetHeight - player.offsetHeight;
+                this.speed.y *= -1;
+                mainScore.increaseScore();
+                this.increaseSpeed();
+            }
+        }
+
         if (newY > boxHeight-ball.offsetHeight) {
             mainScore.resetScore();
             box.removeChild(ball);
             createBall();
             return;
-        }
-
-        if (newY > boxHeight-ball.offsetHeight - player.offsetHeight) {
-            var ballRight = newX + ball.offsetWidth;
-            var playerRight = player.offsetLeft + player.offsetWidth;
-            if (ballRight > player.offsetLeft && newX < playerRight) {
-                this.speed.y *= -1;
-                mainScore.increaseScore();
-                this.increaseSpeed();
-            }
         }
 
         ball.style.left = newX + 'px';
