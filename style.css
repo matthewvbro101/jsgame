@@ -33,3 +33,11 @@
     left: 650px;
     font-size: 40px;
 }
+.brick {
+    width: 80px;
+    height: 40px;
+    background-color: orange;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 1px 2px rgba(0,0,0,0.2);
+}
