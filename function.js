@@ -68,7 +68,7 @@ class Ball {
             this.speed.x *= -1;
             this.increaseSpeed();
         }
-        
+        //if the ball hits the paddle
         if (newY > boxHeight-ball.offsetHeight - player.offsetHeight) {
             var ballRight = newX + ball.offsetWidth;
             var playerRight = player.offsetLeft + player.offsetWidth;
@@ -176,6 +176,7 @@ function moveLeft() {
 function moveRight() {
     player.style.left = parseInt(player.offsetLeft) + 5 + 'px';
 }
+//left and right goes the paddle
 document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 37:
