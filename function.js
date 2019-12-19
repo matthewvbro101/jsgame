@@ -68,7 +68,7 @@ class Ball {
             this.speed.x *= -1;
             this.increaseSpeed();
         }
-    
+        
         if (newY > boxHeight-ball.offsetHeight - player.offsetHeight) {
             var ballRight = newX + ball.offsetWidth;
             var playerRight = player.offsetLeft + player.offsetWidth;
@@ -77,6 +77,7 @@ class Ball {
                 this.speed.y *= -1;
                 mainScore.increaseScore();
                 this.increaseSpeed();
+                hitPaddle();
             }
         }
 
@@ -143,7 +144,20 @@ function createBrick() {
     bricks.push(newBrick);
 }
 
+function hitPaddle() {
+    var newSound = new Audio();
+    newSound.src = 'punch.wav';
+    newSound.play();
+}
+
+function launchBall() {
+    var audioElement = new Audio();
+    audioElement.src = 'pew.mp3';
+    audioElement.play();
+}
+
 function createBall() {
+    launchBall();
     var color = ballColors[Math.floor(Math.random()*ballColors.length)];
     var speed = {
         x: (Math.floor(Math.random()*20)-10)*initSpeed,
